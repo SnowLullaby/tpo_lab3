@@ -1,0 +1,68 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "Посетитель" as Visitor
+actor "Новый\nпользователь" as NewUser
+actor "Зарегистрированный\nпользователь" as RegUser
+
+rectangle "Система PromoPult" {
+  usecase "UC-01 Авторизация\nпользователя" as UC01
+  usecase "UC-02 Регистрация\nпользователя" as UC02
+  usecase "UC-03 Восстановление\nпароля" as UC03
+  usecase "UC-04 Работа с разделом\n«Возможности»" as UC04
+  usecase "UC-05 Переход в блог\nи открытие статьи" as UC05
+  usecase "UC-06 Просмотр кейсов\nSEO-продвижения" as UC06
+  usecase "UC-07 Просмотр\nбонусной программы" as UC07
+  usecase "UC-08 Переход в раздел\nобучения" as UC08
+  usecase "UC-09 Переход в раздел помощи\nи поиск инструкции" as UC09
+}
+
+UC03 .> UC01 : <<extend>>
+
+RegUser --> UC01
+NewUser --> UC02
+RegUser --> UC03
+
+Visitor --> UC04
+Visitor --> UC05
+Visitor --> UC06
+Visitor --> UC07
+Visitor --> UC08
+Visitor --> UC09
+
+NewUser --|> Visitor
+RegUser --|> Visitor
+
+note right of UC02
+Проверяемые поля регистрации:
+1. E-mail
+2. Пароль
+3. Контактный номер
+4. Имя
+5. Согласие на обработку ПД
+6. CAPTCHA
+end note
+
+note right of UC01
+Ограничения:
+- восстановление пароля
+  требует доступа к почте
+end note
+
+note right of UC09
+Проверяемые элементы:
+- категории help-центра
+- открытие статьи
+- поиск инструкции
+- негативный поиск
+end note
+
+note right of UC06
+Сценарий подбора кейсов
+по адресу сайта
+исключён из автотестов
+из-за длительного ожидания
+end note
+@enduml
