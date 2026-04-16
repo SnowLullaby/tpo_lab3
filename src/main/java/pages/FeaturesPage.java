@@ -1,9 +1,10 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Objects;
 
 public class FeaturesPage extends BasePage {
     private final String baseUrl;
@@ -18,7 +19,7 @@ public class FeaturesPage extends BasePage {
     }
 
     public boolean isFeaturesPageOpened() {
-        return driver.getCurrentUrl().contains("technology") || textPresent("Возможности системы");
+        return Objects.requireNonNull(driver.getCurrentUrl()).contains("technology") || textPresent("Возможности системы");
     }
 
     public boolean hasAdditionalMenuBelow() {
@@ -43,11 +44,11 @@ public class FeaturesPage extends BasePage {
     }
 
     public boolean isOnSeoPage() {
-        return driver.getCurrentUrl().toLowerCase().contains("seo") || textPresent("Поисковое продвижение");
+        return Objects.requireNonNull(driver.getCurrentUrl()).toLowerCase().contains("seo") || textPresent("Поисковое продвижение");
     }
 
     public boolean isOnPpcPage() {
-        String url = driver.getCurrentUrl().toLowerCase();
+        String url = Objects.requireNonNull(driver.getCurrentUrl()).toLowerCase();
         return url.contains("context") || url.contains("ppc") || textPresent("Контекстная реклама");
     }
 }

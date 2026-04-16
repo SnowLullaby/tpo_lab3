@@ -18,6 +18,8 @@ public class BlogTest extends BaseUiTest {
     @Test
     @DisplayName("TS-05-02 Положительный поиск статей в блоге")
     void positiveBlogSearchTest() {
+        homePage.open();
+        homePage.clickHeaderLink("Блог");
         blogPage.search(TestData.BLOG_POSITIVE_QUERY);
 
         assertTrue(blogPage.hasSearchResultsForAdvertising(), "По положительному запросу не найдены релевантные материалы");
@@ -26,6 +28,8 @@ public class BlogTest extends BaseUiTest {
     @Test
     @DisplayName("TS-05-03 Негативный поиск статей в блоге по пустому запросу")
     void emptyBlogSearchTest() {
+        homePage.open();
+        homePage.clickHeaderLink("Блог");
         blogPage.search("");
 
         assertTrue(blogPage.hasEmptySearchState() || !blogPage.hasSearchResultsForAdvertising(),
@@ -35,6 +39,8 @@ public class BlogTest extends BaseUiTest {
     @Test
     @DisplayName("TS-05-04 Негативный поиск статей в блоге по нерелевантному запросу")
     void irrelevantBlogSearchTest() {
+        homePage.open();
+        homePage.clickHeaderLink("Блог");
         blogPage.search(TestData.BLOG_NEGATIVE_QUERY);
 
         assertTrue(blogPage.hasEmptySearchState() || !blogPage.hasSearchResultsForAdvertising(),

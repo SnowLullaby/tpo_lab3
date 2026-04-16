@@ -96,7 +96,7 @@ public abstract class BasePage {
         throw new NoSuchElementException("No visible element found for provided XPath list");
     }
 
-    protected boolean waitForUrlContains(String... fragments) {
+    protected void waitForUrlContains(String... fragments) {
         try {
             new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(15))
                     .until(d -> {
@@ -113,13 +113,11 @@ public abstract class BasePage {
                         }
                         return false;
                     });
-            return true;
-        } catch (org.openqa.selenium.WebDriverException e) {
-            return false;
+        } catch (org.openqa.selenium.WebDriverException ignored) {
         }
     }
 
-    protected boolean waitForDocumentReady() {
+    protected void waitForDocumentReady() {
         try {
             new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(15))
                     .until(d -> {
@@ -127,9 +125,7 @@ public abstract class BasePage {
                                 .executeScript("return document.readyState");
                         return "interactive".equals(state) || "complete".equals(state);
                     });
-            return true;
-        } catch (org.openqa.selenium.WebDriverException e) {
-            return false;
+        } catch (org.openqa.selenium.WebDriverException ignored) {
         }
     }
 
